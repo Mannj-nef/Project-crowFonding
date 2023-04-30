@@ -1,0 +1,85 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+}
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+body {
+  min-height: 100vh;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer base {
+  body {
+    @apply font-primary text-base mx-auto;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  input,
+  textarea {
+    @apply outline-none;
+  }
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  .eye-icon {
+    @apply absolute cursor-pointer right-3 lg:right-6 top-1/2 -translate-y-1/2 dark:text-text2;
+  }
+
+  .form-field {
+    @apply mb-[5px] lg:mb-[10px];
+  }
+}
+
+.banner-gradient {
+  background: linear-gradient(179.14deg, rgba(32, 18, 63, 0) -7.14%, #000000 87.01%);
+  opacity: 0.4;
+}
+
+input:focus + .input-error {
+  display: none;
+}
+
+.quill {
+  @apply rounded-xl border border-strock p-4 h-[238px] md:h-[300px] dark:border-darkStroke;
+  .ql-toolbar.ql-snow,
+  .ql-toolbar.ql-snow + .ql-container.ql-snow {
+    @apply border-0;
+  }
+
+  .ql-toolbar.ql-snow {
+    @apply bg-text4  dark:bg-darkStroke rounded-xl w-fit m-auto bg-opacity-10;
+  }
+
+  .ql-editor.ql-blank::before {
+    @apply placeholder:text-text4 not-italic text-sm font-medium dark:text-text2;
+  }
+  .ql-editor {
+    @apply dark:text-white;
+  }
+}
+
+.scroll-hidden {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scroll-hidden::-webkit-scrollbar {
+  display: none;
+}
