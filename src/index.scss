@@ -57,6 +57,8 @@ input:focus + .input-error {
   display: none;
 }
 
+// custom react quill
+
 .quill {
   @apply rounded-xl border border-strock p-4 h-[238px] md:h-[300px] dark:border-darkStroke;
   .ql-toolbar.ql-snow,
@@ -74,6 +76,61 @@ input:focus + .input-error {
   .ql-editor {
     @apply dark:text-white;
   }
+  .ql-toolbar .ql-snow .ql-formats .ql-bold .ql-snow .ql-stroke {
+    @apply dark:stroke-text3;
+  }
+
+  .ql-snow.ql-toolbar .ql-picker-label:hover,
+  .ql-snow .ql-picker.ql-expanded .ql-picker-label {
+    @apply dark:text-text4;
+  }
+
+  .ql-snow.ql-toolbar button:hover .ql-stroke,
+  .ql-snow.ql-toolbar button:focus .ql-stroke,
+  .ql-snow.ql-toolbar button.ql-active .ql-stroke,
+  .ql-snow.ql-toolbar .ql-picker-label:hover .ql-stroke,
+  .ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-stroke,
+  .ql-snow.ql-toolbar .ql-picker-item:hover .ql-stroke,
+  .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke,
+  .ql-snow.ql-toolbar button:hover .ql-stroke-miter,
+  .ql-snow.ql-toolbar button:focus .ql-stroke-miter,
+  .ql-snow.ql-toolbar button.ql-active .ql-stroke-miter,
+  .ql-snow.ql-toolbar .ql-picker-label:hover .ql-stroke-miter,
+  .ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-stroke-miter,
+  .ql-snow.ql-toolbar .ql-picker-item:hover .ql-stroke-miter,
+  .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke-miter,
+  .ql-snow.ql-toolbar button:hover .ql-fill,
+  .ql-snow.ql-toolbar button:focus .ql-fill,
+  .ql-snow.ql-toolbar button.ql-active .ql-fill,
+  .ql-snow.ql-toolbar .ql-picker-label:hover .ql-fill,
+  .ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-fill,
+  .ql-snow.ql-toolbar .ql-picker-item:hover .ql-fill,
+  .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-fill,
+  .ql-snow.ql-toolbar button:hover .ql-stroke.ql-fill,
+  .ql-snow.ql-toolbar button:focus .ql-stroke.ql-fill,
+  .ql-snow.ql-toolbar button.ql-active .ql-stroke.ql-fill,
+  .ql-snow.ql-toolbar .ql-picker-label:hover .ql-stroke.ql-fill,
+  .ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-stroke.ql-fill,
+  .ql-snow.ql-toolbar .ql-picker-item:hover .ql-stroke.ql-fill,
+  .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke.ql-fill,
+  .ql-snow.ql-toolbar .ql-picker-label:hover,
+  .ql-snow.ql-toolbar .ql-picker-item:hover,
+  .ql-snow.ql-toolbar .ql-picker-item.ql-selected {
+    @apply dark:stroke-slate-200 stroke-primary text-primary;
+  }
+  .ql-picker-options .ql-snow.ql-toolbar .ql-picker-item:hover,
+  .ql-snow .ql-toolbar .ql-picker-item:hover,
+  .ql-snow.ql-toolbar .ql-picker-item.ql-selected,
+  .quill .ql-snow.ql-toolbar .ql-picker-item:hover {
+    @apply text-primary;
+  }
+
+  .ql-snow.ql-toolbar button .ql-stroke,
+  .ql-snow.ql-toolbar .ql-picker-label,
+  .ql-snow.ql-toolbar .ql-picker.ql-header .ql-picker-label,
+  .ql-snow.ql-toolbar .ql-picker.ql-header .ql-picker-label .ql-stroke {
+    @apply dark:stroke-text3 dark:text-text3;
+  }
 }
 
 .scroll-hidden {
@@ -83,3 +140,44 @@ input:focus + .input-error {
 .scroll-hidden::-webkit-scrollbar {
   display: none;
 }
+
+table.table-history {
+  th,
+  td,
+  tr {
+    vertical-align: top;
+    padding: 20px;
+  }
+}
+.input-control-commons {
+  @apply border w-full bg-transparent text-text1 dark:text-white font-medium text-sm placeholder:text-text4 dark:placeholder:text-text2  rounded-xl py-4 px-6;
+}
+
+// custom react datapicker
+.react-datepicker-wrapper input {
+  @apply border w-full bg-transparent text-text1 dark:text-white font-medium text-sm placeholder:text-text4 dark:placeholder:text-text2  rounded-xl py-4 px-6 
+  border-strock dark:border-darkStroke;
+}
+.react-datepicker__tab-loop {
+  .react-datepicker {
+    @apply shadow-boxPrimary border-none rounded-lg overflow-hidden dark:shadow-boxDarkPrimary;
+  }
+  .react-datepicker__triangle {
+    @apply hidden;
+  }
+  .react-datepicker__day:hover,
+  .react-datepicker__month-text:hover,
+  .react-datepicker__quarter-text:hover,
+  .react-datepicker__year-text:hover,
+  .react-datepicker__day--today,
+  .react-datepicker__month-text--today,
+  .react-datepicker__quarter-text--today,
+  .react-datepicker__year-text--today {
+    @apply bg-primary bg-opacity-30 text-white rounded-md;
+  }
+  .react-datepicker__day--selected {
+    @apply bg-primary;
+  }
+}
+
+//

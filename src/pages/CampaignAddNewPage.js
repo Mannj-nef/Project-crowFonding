@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import FormField from "../components/common/FormField";
 import Heading from "../components/heading/Heading";
@@ -7,22 +7,48 @@ import Input from "../components/Inputs/Input";
 import { TextArea } from "../components/Inputs/";
 import Label from "../components/label/LabelComponent";
 import CampRowGroup from "../modules/campaign/CampRowGroup";
-import UploadTextReactQuill from "../components/reactQuill/UploadTextReactQuill";
 import Button from "../components/buttons/Button";
-import Dropdown from "../components/dropdown/Dropdown";
+import Dropdown from "../components/dropdown";
+import { categorys, methods } from "../components/common/categoryMock";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import useDebounce from "../hooks/useDebounce";
+import useQuery from "../hooks/useQuery";
+import handleDropdown from "../utils/handleDropdown";
+import UploadTextReactQuill from "../components/reactQuill/UploadTextReactQuill";
 
-const classDropDown =
-  " w-full dark:text-white font-medium text-sm text-text4 dark:placeholder:text-text2 dark:text-text2 dark:border-darkStroke rounded-xl py-4 px-6";
+const urlCountry = process.env.REACT_APP_API_COUNTRIES;
 
 const CampaignAddNewPage = () => {
+  const [searchCountry, setSearchCountry] = useDebounce(null);
+  //
   const [reactQuillValue, setReactQuillValue] = useState("");
+  const [startDate, setStartDate] = useState(new Date());
+  const [endtDate, setEndtDate] = useState(new Date());
+  const { data: countryDatas, isloading: countryLoading } = useQuery(
+    urlCountry,
+    searchCountry
+  );
+
   const {
     handleSubmit,
     formState: { errors },
     control,
+    reset,
+    watch,
+    setValue,
   } = useForm();
+  const [getValueDropdown, setValueDropdown] = handleDropdown(watch, setValue);
 
-  const createNewCampaign = (value) => {};
+  const createNewCampaign = (value) => {
+    const data = {
+      story: reactQuillValue,
+      startDate,
+      endtDate,
+      ...value,
+    };
+    console.log(data);
+  };
 
   return (
     <div className="bg-white dark:bg-darkSecondary rounded-[10px] min-h-screen py-10 px-[66px]  items-start ">
@@ -47,10 +73,23 @@ const CampaignAddNewPage = () => {
             </FormField>
             <FormField className="mb-6">
               <Label>Campaign Title *</Label>
-              <Dropdown
-                title="Select a category"
-                className={`${classDropDown} `}
-              ></Dropdown>
+              <Dropdown>
+                <Dropdown.Select
+                  placeholder={getValueDropdown("category", categorys[0].name)}
+                />
+                <Dropdown.List>
+                  {categorys.map((category) => (
+                    <Dropdown.Option
+                      key={category.id}
+                      onClick={() =>
+                        setValueDropdown("category", category.name)
+                      }
+                    >
+                      <span className="capitalize">{category.name}</span>
+                    </Dropdown.Option>
+                  ))}
+                </Dropdown.List>
+              </Dropdown>
             </FormField>
           </CampRowGroup>
 
@@ -143,35 +182,66 @@ const CampaignAddNewPage = () => {
           <CampRowGroup>
             <FormField className="mb-6">
               <Label>Campaign End Method</Label>
-              <Dropdown title="Select one" className={classDropDown}></Dropdown>
+              <Dropdown>
+                <Dropdown.Select
+                  placeholder={getValueDropdown("method", "Select one")}
+                />
+                <Dropdown.List>
+                  {methods.map((method) => (
+                    <Dropdown.Option
+                      key={method.id}
+                      onClick={() => setValueDropdown("method", method.name)}
+                    >
+                      <span className="capitalize">{method.name}</span>
+                    </Dropdown.Option>
+                  ))}
+                </Dropdown.List>
+              </Dropdown>
             </FormField>
             <FormField className="mb-6">
               <Label>Counrty</Label>
-              <Dropdown
-                title="Select a country"
-                className={classDropDown}
-              ></Dropdown>
+              <Dropdown>
+                <Dropdown.Select
+                  placeholder={getValueDropdown("country", "Select A Country")}
+                />
+                <Dropdown.List>
+                  <Dropdown.Search
+                    onChange={(e) => setSearchCountry(e.target.value)}
+                    placeholder="search country"
+                  ></Dropdown.Search>
+                  {countryDatas.length > 0 &&
+                    countryDatas.map((country) => {
+                      const name = country?.name?.common;
+                      return (
+                        <Dropdown.Option
+                          key={name}
+                          onClick={() => setValueDropdown("country", name)}
+                        >
+                          <span className="capitalize">{name}</span>
+                        </Dropdown.Option>
+                      );
+                    })}
+                </Dropdown.List>
+              </Dropdown>
             </FormField>
           </CampRowGroup>
 
           <CampRowGroup>
             <FormField className="mb-6">
               <Label htmlFor="start-date">Start Date</Label>
-              <Input
-                control={control}
-                type="text"
-                name="start-date"
-                placeholder="Start Date"
-              ></Input>
+              <DatePicker
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+                dateFormat="dd/MM/yyy"
+              />
             </FormField>
             <FormField className="mb-6">
               <Label htmlFor="end-date">End Date</Label>
-              <Input
-                control={control}
-                type="text"
-                name="end-date"
-                placeholder="Start Date"
-              ></Input>
+              <DatePicker
+                selected={endtDate}
+                onChange={(date) => setEndtDate(date)}
+                dateFormat="dd/MM/yyy"
+              />
             </FormField>
           </CampRowGroup>
         </div>

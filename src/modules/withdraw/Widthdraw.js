@@ -11,7 +11,7 @@ const bgImage = [
 
 const Widthdraw = () => {
   return (
-    <div className="w-[327px] lg:w-[407px] shadow-boxPrimary rounded-xl overflow-hidden">
+    <div className="w-full lg:w-[407px] mb-5 shadow-boxPrimary dark:shadow-boxDarkPrimary rounded-xl overflow-hidden">
       <div className="text-text2 text-center relative rounded-xl overflow-hidden">
         <div className="absolute w-full ">
           {bgImage.map((item) => (

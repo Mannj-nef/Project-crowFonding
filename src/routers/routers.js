@@ -17,6 +17,7 @@ const CampaignView = lazy(() =>
   import("../modules/campaign/CampaignViewDetail")
 );
 const widthDraw = lazy(() => import("../pages/Withdrawpage"));
+const profile = lazy(() => import("../pages/Profile"));
 
 const ROUTER_PATCH = {
   HOME: {
@@ -125,6 +126,11 @@ const ROUTER = [
   {
     path: ROUTER_PATCH.WITHDRAW.path,
     component: widthDraw,
+    layout: DashboardLayout,
+  },
+  {
+    path: ROUTER_PATCH.PROFILE.path,
+    component: profile,
     layout: DashboardLayout,
   },
 

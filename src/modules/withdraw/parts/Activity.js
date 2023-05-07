@@ -48,7 +48,7 @@ const Activity = () => {
   return (
     <div className="activity p-5">
       <div className="flex justify-between font-semibold mb-[18px]">
-        <h3 className="text-text1 text-xl">Activity</h3>
+        <h3 className="text-text1 text-xl dark:text-white">Activity</h3>
         <span className="text-secondary capitalize cursor-pointer">
           View All
         </span>
