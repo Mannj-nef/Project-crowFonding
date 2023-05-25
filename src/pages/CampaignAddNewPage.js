@@ -15,9 +15,13 @@ import "react-datepicker/dist/react-datepicker.css";
 import useDebounce from "../hooks/useDebounce";
 import useQuery from "../hooks/useQuery";
 import handleDropdown from "../utils/handleDropdown";
-import UploadTextReactQuill from "../components/reactQuill/UploadTextReactQuill";
+import { UploadTextReactQuill } from "../components/reactQuill";
+import ImageUpload from "../components/image/ImageUpload";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const urlCountry = process.env.REACT_APP_API_COUNTRIES;
+const campaignApi = `${process.env.REACT_APP_API_URL}/campaigns`;
 
 const CampaignAddNewPage = () => {
   const [searchCountry, setSearchCountry] = useDebounce(null);
@@ -40,14 +44,22 @@ const CampaignAddNewPage = () => {
   } = useForm();
   const [getValueDropdown, setValueDropdown] = handleDropdown(watch, setValue);
 
-  const createNewCampaign = (value) => {
+  const createNewCampaign = async (values) => {
     const data = {
       story: reactQuillValue,
       startDate,
       endtDate,
-      ...value,
+      ...values,
     };
     console.log(data);
+
+    try {
+      await axios.post(campaignApi, data);
+      toast.success("success");
+    } catch (error) {
+      toast.error(error);
+      throw error;
+    }
   };
 
   return (
@@ -60,6 +72,7 @@ const CampaignAddNewPage = () => {
       <Gap gap="40" />
       <form onSubmit={handleSubmit(createNewCampaign)} autoComplete="off">
         <div>
+          {/* title, category */}
           <CampRowGroup>
             <FormField className="mb-6">
               <Label htmlFor="title">Campaign Title *</Label>
@@ -72,7 +85,7 @@ const CampaignAddNewPage = () => {
               ></Input>
             </FormField>
             <FormField className="mb-6">
-              <Label>Campaign Title *</Label>
+              <Label>Campaign Category *</Label>
               <Dropdown>
                 <Dropdown.Select
                   placeholder={getValueDropdown("category", categorys[0].name)}
@@ -93,6 +106,7 @@ const CampaignAddNewPage = () => {
             </FormField>
           </CampRowGroup>
 
+          {/* Description */}
           <FormField>
             <Label htmlFor="description">Short Description *</Label>
             <TextArea
@@ -103,6 +117,7 @@ const CampaignAddNewPage = () => {
             ></TextArea>
           </FormField>
 
+          {/* Story */}
           <FormField>
             <Label htmlFor="description">Story *</Label>
             <UploadTextReactQuill
@@ -112,6 +127,31 @@ const CampaignAddNewPage = () => {
               placeholder="Write your story......"
             ></UploadTextReactQuill>
           </FormField>
+        </div>
+
+        {/* Featured image */}
+        <div>
+          <CampRowGroup className="grid grid-cols-2">
+            <FormField className="w-auto">
+              <Label>Featured Image</Label>
+              <ImageUpload onChange={setValue} name="featured_image" />
+            </FormField>
+
+            <div className="">
+              <Label>Sub Image</Label>
+              <div className="flex gap-5">
+                <FormField>
+                  <ImageUpload onChange={setValue} name="sub_image_first" />
+                </FormField>
+                <FormField>
+                  <ImageUpload onChange={setValue} name="sub_image_second" />
+                </FormField>
+                <FormField>
+                  <ImageUpload onChange={setValue} name="sub_image_third" />
+                </FormField>
+              </div>
+            </div>
+          </CampRowGroup>
         </div>
 
         <Gap gap="40" />
@@ -128,6 +168,7 @@ const CampaignAddNewPage = () => {
         <Gap gap="40" />
 
         <div>
+          {/* Goal, Raised */}
           <CampRowGroup>
             <FormField className="mb-6">
               <Label htmlFor="goal">Goal *</Label>
@@ -151,6 +192,7 @@ const CampaignAddNewPage = () => {
             </FormField>
           </CampRowGroup>
 
+          {/* Prefilled, Video */}
           <CampRowGroup>
             <FormField className="mb-6">
               <Label htmlFor="prefilled">Amount Prefilled</Label>
@@ -179,6 +221,7 @@ const CampaignAddNewPage = () => {
             </FormField>
           </CampRowGroup>
 
+          {/* Method,  Counrty*/}
           <CampRowGroup>
             <FormField className="mb-6">
               <Label>Campaign End Method</Label>
@@ -226,6 +269,7 @@ const CampaignAddNewPage = () => {
             </FormField>
           </CampRowGroup>
 
+          {/* Date */}
           <CampRowGroup>
             <FormField className="mb-6">
               <Label htmlFor="start-date">Start Date</Label>

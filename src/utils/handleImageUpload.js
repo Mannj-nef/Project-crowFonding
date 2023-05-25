@@ -1,17 +1,19 @@
 import axios from "axios";
 import { toast } from "react-toastify";
+import { imgbbAPI } from "../config";
 
-const urlUploadImage = process.env.REACT_APP_API_IMAGE_UPLOAD;
+const urlUploadImage = imgbbAPI;
 
-function imageUpload(urlUpload = urlUploadImage) {
+function imageUpload(apiUrl = urlUploadImage) {
   const imageUploader = {
     upload: async (file) => {
       try {
         const formData = new FormData();
         formData.append("image", file);
 
-        const response = await axios.post(urlUpload, formData);
-        return response.data.data.url;
+        const { data: dataImage } = await axios.post(apiUrl, formData);
+
+        return dataImage.data.url;
       } catch (error) {
         toast.error(error);
         throw new Error("Upload failed");

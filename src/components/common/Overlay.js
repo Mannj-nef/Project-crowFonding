@@ -4,7 +4,7 @@ import { closeModalSearch } from "../../store/modal/modalSlice";
 import { handleModal } from "../../utils/handleModal";
 
 const Overlay = () => {
-  const { isOpenModalSearch } = useSelector((state) => state.modalSlice);
+  const { isOpenModalSearch } = useSelector((state) => state.modal);
   const dispatch = useDispatch();
   return (
     <>

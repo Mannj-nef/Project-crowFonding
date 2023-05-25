@@ -11,6 +11,7 @@ let users = database.users;
 const cors = require("cors");
 const bcrypt = require("bcrypt");
 app.use(cors());
+
 const generateTokens = (payload) => {
   const { id, name } = payload;
   const accessToken = jwt.sign({ id, name }, process.env.ACCESS_TOKEN_SECRET, {
@@ -26,6 +27,7 @@ const generateTokens = (payload) => {
 
   return { accessToken, refreshToken };
 };
+
 function updateRefreshToken(name, refreshToken) {
   console.log("updateRefreshToken ~ name", name);
   users = users.map((user) => {
@@ -39,6 +41,7 @@ function updateRefreshToken(name, refreshToken) {
   });
   fs.writeFileSync("db.json", JSON.stringify({ ...database, users }));
 }
+
 app.get("/me", verifyToken, (req, res) => {
   const user = users.find((user) => {
     return user.id === req.userId;
@@ -46,6 +49,7 @@ app.get("/me", verifyToken, (req, res) => {
   if (!user) return res.sendStatus(401);
   res.json(user);
 });
+
 app.post("/auth/login", (req, res) => {
   const email = req.body.email;
   const user = users.find((user) => {

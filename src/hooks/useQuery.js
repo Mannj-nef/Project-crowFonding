@@ -19,7 +19,7 @@ const useQuery = (url = null, value = null) => {
         if (!value) return;
         setIsLoading(true);
 
-        const apiUrl = url + value;
+        const apiUrl = `${url}/${value}`;
         const { data } = await axios.get(apiUrl);
 
         setIsLoading(false);

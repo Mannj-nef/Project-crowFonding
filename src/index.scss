@@ -60,7 +60,7 @@ input:focus + .input-error {
 // custom react quill
 
 .quill {
-  @apply rounded-xl border border-strock p-4 h-[238px] md:h-[300px] dark:border-darkStroke;
+  @apply rounded-xl border overflow-hidden border-strock p-4 h-[238px] md:h-[300px] dark:border-darkStroke;
   .ql-toolbar.ql-snow,
   .ql-toolbar.ql-snow + .ql-container.ql-snow {
     @apply border-0;

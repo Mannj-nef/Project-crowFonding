@@ -7,7 +7,7 @@ import { IconCheck, IconClose } from "../Icons";
 import Modal from "./Modal";
 
 const ModalThanks = () => {
-  const { isOpenModelToastThanks } = useSelector((state) => state.modalSlice);
+  const { isOpenModelToastThanks } = useSelector((state) => state.modal);
   const dispatch = useDispatch();
   return (
     <Modal isOpen={isOpenModelToastThanks}>

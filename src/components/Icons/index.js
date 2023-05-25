@@ -28,6 +28,7 @@ import IconStar from "./IconStar";
 import IconCheck from "./IconCheck";
 import IconWallet from "./IconWallet";
 import IconDown from "./IconDown";
+import IconUpload from "./IconUpload";
 
 export {
   EyeOff,
@@ -59,4 +60,5 @@ export {
   IconCheck,
   IconWallet,
   IconDown,
+  IconUpload,
 };

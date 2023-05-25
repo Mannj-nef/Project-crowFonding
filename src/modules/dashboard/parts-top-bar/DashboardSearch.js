@@ -12,7 +12,7 @@ import {
 } from "../../../store/modal/modalSlice";
 
 const Search = ({ className }) => {
-  const { isOpenModalSearch } = useSelector((state) => state.modalSlice);
+  const { isOpenModalSearch } = useSelector((state) => state.modal);
   const dispatch = useDispatch();
   return (
     <div className="relative z-50 flex-1">
