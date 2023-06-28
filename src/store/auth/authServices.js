@@ -19,4 +19,13 @@ const requestAuthLogin = (data) => {
   return axios.post(endpoints.authLogin, data);
 };
 
-export { requestAuthRegister, requestAuthLogin };
+const requestAuthFetchMe = (token) => {
+  return axios.get(endpoints.me, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+export { requestAuthRegister, requestAuthLogin, requestAuthFetchMe };

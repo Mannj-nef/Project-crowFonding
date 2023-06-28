@@ -10,7 +10,7 @@ const ForgotPassword = lazy(() => import("../modules/sign-in"));
 const DashboardLayout = lazy(() => import("../layouts/DashboardLayout"));
 const CheckOutLayout = lazy(() => import("../layouts/CheckOutLayout"));
 const CategoryPage = lazy(() => import("../pages/CategoryPage"));
-const CampaignCreate = lazy(() => import("../pages/CampaignAddNewPage"));
+const StartCampaign = lazy(() => import("../pages/StartCampaign"));
 const CheackoutPage = lazy(() => import("../pages/CheackoutPage"));
 const ShippingPage = lazy(() => import("../pages/ShippingPage"));
 const CampaignView = lazy(() =>
@@ -100,7 +100,7 @@ const ROUTER = [
   },
   {
     path: ROUTER_PATCH.CAMPAIGN_ADD_NEW.path,
-    component: CampaignCreate,
+    component: StartCampaign,
     layout: DashboardLayout,
   },
   {

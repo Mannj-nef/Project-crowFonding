@@ -36,7 +36,11 @@ const SignIn = () => {
 
   // handle login
   const handleSignIn = (data) => {
-    dispatch(login(data));
+    const payload = {
+      ...data,
+      email: data.email.toLowerCase(),
+    };
+    dispatch(login(payload));
     reset();
   };
 

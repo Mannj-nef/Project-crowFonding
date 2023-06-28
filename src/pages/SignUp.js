@@ -14,7 +14,6 @@ import { Heading } from "../components/heading";
 import FormField from "../components/common/FormField";
 import { useDispatch } from "react-redux";
 import { register } from "../store/auth/authSlice";
-import { getToken } from "../utils/handleToken";
 
 const schema = yupSchema.object({
   name: YUP.NAME,
@@ -26,8 +25,6 @@ const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
 
-  getToken.all();
-
   const { handleSubmit, control, formState, reset } = useForm({
     resolver: yupResolver(schema),
     mode: "onChange",
@@ -35,7 +32,11 @@ const SignUp = () => {
   const { errors, isSubmitting } = formState;
 
   const handleSignUp = (data) => {
-    dispatch(register(data));
+    const payload = {
+      ...data,
+      email: data.email.toLowerCase(),
+    };
+    dispatch(register(payload));
     reset();
   };
 

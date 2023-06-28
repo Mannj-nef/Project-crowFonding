@@ -9,11 +9,12 @@ const authSlice = createSlice({
   name: "authSlice",
   initialState,
   reducers: {
-    login: (state, action) => {
-      state.user = action.payload;
-    },
+    login: (state, action) => {},
     register: (state, action) => {},
-    updateUser: (state, action) => {},
+    updateUser: (state, action) => {
+      state.user = action.payload.user;
+      state.accessToken = action.payload.accessToken;
+    },
   },
 });
 

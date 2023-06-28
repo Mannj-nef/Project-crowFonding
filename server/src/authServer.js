@@ -97,8 +97,9 @@ app.post("/auth/register", (req, res) => {
     return user.email === email;
   });
   if (user) {
-    return res.sendStatus(409).json({ error: "User already exists" });
+    return res.status(409).json({ message: "User already exists" });
   }
+
   bcrypt.hash(password, 10, (err, hash) => {
     if (err) {
       return;
