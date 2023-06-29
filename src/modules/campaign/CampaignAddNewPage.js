@@ -21,7 +21,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 const urlCountry = process.env.REACT_APP_API_COUNTRIES;
-const campaignApi = `${process.env.REACT_APP_API_URL}/campaigns`;
+const campaignApi = `${process.env.REACT_APP_API_PRIVETE}/campaigns`;
 
 const CampaignAddNewPage = () => {
   const [searchCountry, setSearchCountry] = useDebounce(null);

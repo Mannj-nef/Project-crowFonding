@@ -47,6 +47,7 @@ app.get("/me", verifyToken, (req, res) => {
     return user.id === req.userId;
   });
   if (!user) return res.sendStatus(401);
+  delete user.password;
   res.json(user);
 });
 

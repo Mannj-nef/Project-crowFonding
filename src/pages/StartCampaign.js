@@ -8,8 +8,6 @@ const StartCampaign = () => {
   const { user } = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
-  console.log({ user });
-
   useEffect(() => {
     if (!user) {
       navigate(ROUTER_PATCH.SIGN_IN.path);

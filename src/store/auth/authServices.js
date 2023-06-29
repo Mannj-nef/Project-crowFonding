@@ -20,6 +20,8 @@ const requestAuthLogin = (data) => {
 };
 
 const requestAuthFetchMe = (token) => {
+  if (!token) return;
+
   return axios.get(endpoints.me, {
     headers: {
       "Content-Type": "application/json",
@@ -28,4 +30,15 @@ const requestAuthFetchMe = (token) => {
   });
 };
 
-export { requestAuthRegister, requestAuthLogin, requestAuthFetchMe };
+const requestAuthRefreshToken = (token) => {
+  if (!token) return;
+
+  return axios.post(endpoints.token, { refreshToken: token });
+};
+
+export {
+  requestAuthRegister,
+  requestAuthLogin,
+  requestAuthFetchMe,
+  requestAuthRefreshToken,
+};

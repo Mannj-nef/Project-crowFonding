@@ -13,7 +13,7 @@ import { IconEyeToogle } from "../components/Icons";
 import { Heading } from "../components/heading";
 import FormField from "../components/common/FormField";
 import { useDispatch } from "react-redux";
-import { register } from "../store/auth/authSlice";
+import { authRegister } from "../store/auth/authSlice";
 
 const schema = yupSchema.object({
   name: YUP.NAME,
@@ -36,7 +36,7 @@ const SignUp = () => {
       ...data,
       email: data.email.toLowerCase(),
     };
-    dispatch(register(payload));
+    dispatch(authRegister(payload));
     reset();
   };
 

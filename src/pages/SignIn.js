@@ -14,7 +14,7 @@ import { IconEyeToogle } from "../components/Icons";
 import { Heading } from "../components/heading";
 import FormField from "../components/common/FormField";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../store/auth/authSlice";
+import { authLogin } from "../store/auth/authSlice";
 
 const schema = yupSchema.object({
   email: YUP.EMAIL,
@@ -40,13 +40,13 @@ const SignIn = () => {
       ...data,
       email: data.email.toLowerCase(),
     };
-    dispatch(login(payload));
+    dispatch(authLogin(payload));
     reset();
   };
 
   useEffect(() => {
     if (user) {
-      navigate(ROUTER_PATCH.HOME.path);
+      navigate(-1);
     }
   }, [user, navigate]);
 
