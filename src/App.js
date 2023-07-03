@@ -11,7 +11,7 @@ function App() {
 
   useEffect(() => {
     const refreshToken = getToken.refreshToken();
-    if (!user) {
+    if (!user && refreshToken) {
       dispatch(authRefreshToken(refreshToken));
     }
   }, [user, dispatch]);

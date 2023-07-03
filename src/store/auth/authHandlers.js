@@ -2,12 +2,13 @@ import { call, put } from "redux-saga/effects";
 import {
   requestAuthFetchMe,
   requestAuthLogin,
+  requestAuthLogout,
   requestAuthRefreshToken,
   requestAuthRegister,
 } from "./authServices";
 import { toast } from "react-toastify";
 import MESSAGES from "../../constants/message";
-import { removeToken, setToken } from "../../utils/handleToken";
+import { getToken, removeToken, setToken } from "../../utils/handleToken";
 import { authUpdateUser } from "./authSlice";
 
 function* handleAuthRegister(action) {
@@ -78,4 +79,28 @@ function* handleRefreshToken(action) {
   }
 }
 
-export { handleAuthRegister, handleAuthLogin, handleRefreshToken };
+function* handleLogOut() {
+  const accessToken = getToken.accessToken();
+
+  try {
+    yield call(requestAuthLogout, accessToken);
+
+    yield put(
+      authUpdateUser({
+        user: null,
+        accessToken: null,
+      })
+    );
+
+    removeToken();
+  } catch (error) {
+    toast.error(error);
+  }
+}
+
+export {
+  handleAuthRegister,
+  handleAuthLogin,
+  handleRefreshToken,
+  handleLogOut,
+};

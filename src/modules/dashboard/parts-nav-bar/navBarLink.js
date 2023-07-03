@@ -35,12 +35,13 @@ const NAVBAR_LINK = [
     icon: <IconProfile />,
     to: ROUTER_PATCH.PROFILE.path,
   },
-  {
-    title: "Logout",
-    icon: <IconLogout />,
-    onClick: () => {},
-  },
 ];
+
+const LOG_OUT = {
+  title: "Logout",
+  icon: <IconLogout />,
+  onClick: () => {},
+};
 
 const DARK_MODE = {
   title: "Light/Dark",
@@ -50,5 +51,5 @@ const DARK_MODE = {
   },
 };
 
-export { DARK_MODE };
+export { DARK_MODE, LOG_OUT };
 export default NAVBAR_LINK;

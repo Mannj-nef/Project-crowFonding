@@ -36,9 +36,21 @@ const requestAuthRefreshToken = (token) => {
   return axios.post(endpoints.token, { refreshToken: token });
 };
 
+const requestAuthLogout = (token) => {
+  if (!token) return;
+
+  return axios.delete(endpoints.logout, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
 export {
   requestAuthRegister,
   requestAuthLogin,
   requestAuthFetchMe,
   requestAuthRefreshToken,
+  requestAuthLogout,
 };
