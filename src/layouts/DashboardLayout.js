@@ -6,6 +6,7 @@ import { NavBar, TopBar } from "../modules/dashboard";
 
 const DashboardLayout = ({ children }) => {
   useScrollToTop(children);
+
   return (
     <>
       <ModalThanks></ModalThanks>

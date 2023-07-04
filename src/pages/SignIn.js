@@ -1,11 +1,11 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import * as yupSchema from "yup";
 
 import { useForm } from "react-hook-form";
 import LayoutAuthen from "../layouts/LayoutAuthen";
 import YUP from "../constants/yupSchemaValidate";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ROUTER_PATCH } from "../routers";
 import { Button, ButtonGoogle } from "../components/buttons";
 import Label from "../components/label";
@@ -13,7 +13,7 @@ import { Input } from "../components/Inputs";
 import { IconEyeToogle } from "../components/Icons";
 import { Heading } from "../components/heading";
 import FormField from "../components/common/FormField";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { authLogin } from "../store/auth/authSlice";
 
 const schema = yupSchema.object({
@@ -23,9 +23,7 @@ const schema = yupSchema.object({
 
 const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   // react-hook-form library
   const { handleSubmit, control, formState, reset } = useForm({
@@ -43,12 +41,6 @@ const SignIn = () => {
     dispatch(authLogin(payload));
     reset();
   };
-
-  useEffect(() => {
-    if (user) {
-      navigate(-1);
-    }
-  }, [user, navigate]);
 
   return (
     <LayoutAuthen>

@@ -1,20 +1,27 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { withErrorBoundary } from "react-error-boundary";
 
-import { ROUTER_PATCH } from "../routers/routers";
 import ErrorComponent from "../components/common/ErrorComponent";
 import { LogoApp } from "../modules/common";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const LayoutAuthen = ({ children, className }) => {
+  const { user } = useSelector((state) => state.auth);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      navigate(-1);
+    }
+  }, [user, navigate]);
+
+  if (user) return null;
+
   return (
     <div className="p-6 lg:p-10 bg-lite dark:bg-darkbg relative min-h-screen isolate overflow-hidden">
-      {/* <img
-        src="/ellipse.png"
-        className="hidden lg:block pointer-events-none absolute bottom-0 right-0 w-full left-0 -z-[1]"
-        alt="bg"
-      /> */}
       <div className="hidden lg:block absolute w-[2500px] h-[2500px] rounded-full bg-primary -bottom-[2000px] right-0 left-[-400px] -z-[1] opacity-5"></div>
 
       <LogoApp className="lg:mb-[66px] block"></LogoApp>
